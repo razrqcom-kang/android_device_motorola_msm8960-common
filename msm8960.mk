@@ -96,9 +96,6 @@ PRODUCT_PACKAGES += \
 
 # GPS
 PRODUCT_PACKAGES += \
-    libloc_adapter \
-    libloc_eng \
-    libgps.utils \
     gps.msm8960
 
 # Misc
@@ -130,6 +127,8 @@ PRODUCT_PACKAGES += \
 
 # Init scripts
 PRODUCT_PACKAGES += \
+    init.crda.sh \
+    init.qcom.bt.sh \
     init.qcom.class_core.sh \
     init.qcom.class_main.sh \
     init.qcom.coex.sh \
@@ -141,14 +140,17 @@ PRODUCT_PACKAGES += \
     init.qcom.post_boot.sh \
     init.qcom.sh \
     init.qcom.syspart_fixup.sh \
-    init.qcom.usb.sh \
-    init.crda.sh
+    init.qcom.usb.sh
 
 # Scripts
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/scripts/mount_pds.sh:system/bin/mount_pds.sh \
     $(LOCAL_PATH)/scripts/qcamerasrvwrapper.sh:system/bin/qcamerasrvwrapper.sh \
     $(LOCAL_PATH)/scripts/sensorsqcomwrapper.sh:system/bin/sensorsqcomwrapper.sh \
+
+# GPS configuration
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/gps/gps.conf:system/etc/gps.conf
 
 # Audio configuration
 PRODUCT_COPY_FILES += \
@@ -241,18 +243,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Media
 PRODUCT_PROPERTY_OVERRIDES += \
-    lpa.decode=true \
-    lpa.use-stagefright=true \
-    media.stagefright.enable-player=true \
-    media.stagefright.enable-http=true \
-    media.stagefright.enable-aac=true \
-    media.stagefright.enable-qcp=true \
-    media.stagefright.enable-fma2dp=true \
-    media.stagefright.enable-scan=true \
-    mmp.enable.3g2=true \
+    lpa.decode=false \
+    tunnel.decode=true \
+    tunnel.audiovideo.decode=true \
     af.resampler.quality=255 \
-    ro.opengles.version=131072 \
-    mpq.audio.decode=true
+    ro.opengles.version=131072
 
 #misc
 PRODUCT_PROPERTY_OVERRIDES += \
